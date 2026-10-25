@@ -200,6 +200,7 @@ fn batch_ocr_uses_existing_models_or_reports_the_missing_models_per_file() {
     }
 }
 
+/// Verify batch OCR uses the French OCR model and settings when configured with "language": "fr".
 #[test]
 fn batch_ocr_uses_french_model_when_configured() {
     let dir = tempfile::tempdir().unwrap();

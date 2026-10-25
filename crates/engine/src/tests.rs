@@ -4531,6 +4531,7 @@ fn recognize_text_reads_the_euro_sign() {
     assert!(text.contains("€250"), "{text}");
 }
 
+/// End-to-end OCR recognition on a rendered scan with French accented words.
 #[test]
 fn recognize_text_reads_french_accents() {
     if !ocr::available_for_language("fr") {

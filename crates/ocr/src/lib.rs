@@ -129,6 +129,8 @@ pub struct Ocr {
 }
 
 impl Ocr {
+    /// Load the text detection and recognition models from `models`, configuring the appropriate
+    /// alphabet for the target language (such as [`ALPHABET_FR`] for French).
     pub fn load(models: &Models) -> Result<Ocr, OcrError> {
         let alphabet = if models.language == "fr" { ALPHABET_FR } else { ALPHABET };
         let load = |p: &Path| rten::Model::load_file(p).map_err(|e| OcrError::Load(p.display().to_string(), e.to_string()));
@@ -231,6 +233,7 @@ fn ink_extent(text: &str) -> (f64, f64) {
     (if tall { CAP_HEIGHT } else { X_HEIGHT }, if low { -DESCENT } else { 0.0 })
 }
 
+/// Format a float with up to four decimal places, trimming trailing zeros.
 fn num(v: f64) -> String {
     let s = format!("{:.4}", if v.abs() < 1e-9 { 0.0 } else { v });
     let s = s.trim_end_matches('0').trim_end_matches('.');
